@@ -22,7 +22,7 @@ const HomePage = () => {
       {/* Contenu principal */}
       <div className="relative z-10 flex flex-col items-center space-y-12">
         {/* Logo/Titre avec effet glassmorphism */}
-        <div className="relative backdrop-blur-sm bg-white/5 rounded-2xl p-8 shadow-2xl">
+        <div className="relative backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
           <h1 className="text-7xl font-black bg-gradient-to-br from-white to-gray-400 bg-clip-text text-transparent">
             UNDER
             <span className="text-blue-500">COVER</span>
