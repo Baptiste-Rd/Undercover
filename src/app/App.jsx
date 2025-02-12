@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./homepage";
-import CreerPage from "./creer";
-import RejoindrePage from "./rejoindre";
+import "./App.css";
+import HomePage from "./HomePage";
+import CreerPage from "./Creer";
+import RejoindrePage from "./Rejoindre";
+import GameRoom from "./GameRoom";
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/creer" element={<CreerPage />} />
         <Route path="/rejoindre" element={<RejoindrePage />} />
+        <Route path="/game" element={<GameRoom />} />
       </Routes>
     </Router>
   );
