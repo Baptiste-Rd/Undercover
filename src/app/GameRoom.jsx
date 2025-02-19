@@ -42,6 +42,12 @@ export default function GameRoom() {
   const [allPlayersReady, setAllPlayersReady] = useState(false); // Nouvel état
   const roomCode = "AXBY12"; // Pour le test, à remplacer par un vrai code généré
 
+  const [isCardOpen, setIsCardOpen] = useState(false); // État pour afficher/masquer la carte
+
+  function handleSelected(value) {
+    value === 1 ? setIsCardOpen(true) : null;
+  }
+
   // Mock de connexion d'un nouveau joueur
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -141,6 +147,7 @@ export default function GameRoom() {
           {players.map((player) => (
             <div
               key={player.id}
+              onClick={() => handleSelected(player.id) /* Afficher la carte */}
               className={`p-4 rounded-lg flex items-center justify-between ${
                 player.isPlaying
                   ? "bg-indigo-600"
@@ -175,12 +182,20 @@ export default function GameRoom() {
           ))}
         </div>
 
+        {/*Gestion de la carte*/}
+
+        {/* Affichage conditionnel de Card */}
+        <Card isOpen={isCardOpen} onClose={() => setIsCardOpen(false)} />
+
+        {/*Affichage de l'id du joueur lorsque son nom est survolé */}
+
         {/* Contrôles de jeu */}
         {gameState === "waiting" && players[0].isHost && (
           <button
             onClick={() => {
               startPlayerTurn(players[0].id);
               setAllPlayersReady(true); // Réinitialiser l'état
+              setIsCardOpen(true); // Ouvre la carte
             }}
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors"
           >

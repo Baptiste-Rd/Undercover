@@ -36,7 +36,7 @@ const HomePage = () => {
             className="group relative w-full"
             onMouseEnter={() => setIsPlayHovered(true)}
             onMouseLeave={() => setIsPlayHovered(false)}
-            onClick={() => handleRedirect("creer")}
+            onClick={() => handleRedirect("gameMode")}
           >
             <div
               className={`
@@ -57,7 +57,7 @@ const HomePage = () => {
           {/* Bouton Règles avec effet glassmorphism */}
           <button
             className="w-full backdrop-blur-sm bg-white/5 hover:bg-white/10 rounded-lg px-8 py-4 transition-all duration-300 hover:-translate-y-1"
-            onClick={() => handleRedirect("rejoindre")}
+            onClick={() => handleRedirect("rules")}
           >
             <div className="flex items-center justify-center gap-3">
               <Book size={20} />
