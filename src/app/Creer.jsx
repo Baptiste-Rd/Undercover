@@ -15,12 +15,12 @@ export default function Creer() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Plus tard, vous pourrez ajouter ici la logique de création de partie côté serveur
-    navigate('/game', { 
-      state: { 
+    navigate("/game", {
+      state: {
         ...config,
         roomCode: Math.random().toString(36).substring(2, 8).toUpperCase(),
-        createdAt: new Date().toISOString()
-      } 
+        createdAt: new Date().toISOString(),
+      },
     });
   };
 

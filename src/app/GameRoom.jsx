@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Card from "./Card";
 
 const MOCK_PLAYERS = [
   {
@@ -38,6 +39,7 @@ export default function GameRoom() {
   const [players, setPlayers] = useState(MOCK_PLAYERS);
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [timer, setTimer] = useState(null);
+  const [allPlayersReady, setAllPlayersReady] = useState(false); // Nouvel état
   const roomCode = "AXBY12"; // Pour le test, à remplacer par un vrai code généré
 
   // Mock de connexion d'un nouveau joueur
@@ -83,6 +85,13 @@ export default function GameRoom() {
       }))
     );
   };
+
+  // Vérifier si tous les joueurs sont prêts
+  useEffect(() => {
+    if (players.every((player) => player.status === "ready")) {
+      setAllPlayersReady(true);
+    }
+  }, [players]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -169,12 +178,18 @@ export default function GameRoom() {
         {/* Contrôles de jeu */}
         {gameState === "waiting" && players[0].isHost && (
           <button
-            onClick={() => startPlayerTurn(players[0].id)}
+            onClick={() => {
+              startPlayerTurn(players[0].id);
+              setAllPlayersReady(true); // Réinitialiser l'état
+            }}
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-lg text-lg transition-colors"
           >
             Commencer la partie
           </button>
         )}
+
+        {/* Afficher le composant Card lorsque tous les joueurs sont prêts */}
+        {allPlayersReady && <Card />}
       </main>
     </div>
   );
