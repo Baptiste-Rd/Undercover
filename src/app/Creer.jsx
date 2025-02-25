@@ -3,13 +3,16 @@ import { useNavigate } from "react-router-dom";
 
 export default function Creer() {
   const navigate = useNavigate();
+  const defaultSpeakingTime = 65;
+  const defaultDebateTime = 185;
+
   const [config, setConfig] = useState({
     playerCount: 4,
     saboteur: false,
     undercover: true,
     mrWhite: false,
-    speakingTime: 20,
-    debateTime: 60,
+    speakingTime: defaultSpeakingTime,
+    debateTime: defaultDebateTime,
   });
 
   const handleSubmit = (e) => {
@@ -107,12 +110,29 @@ export default function Creer() {
             {/* Temps de parole */}
             <div className="space-y-2">
               <label className="block text-sm">
-                Temps de parole par joueur: {config.speakingTime}s
+                Temps de parole par joueur:{" "}
+                {config.speakingTime < 65 ? (
+                  config.speakingTime
+                ) : (
+                  <span className="relative inline-flex items-center h-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 -6 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.74-8z" />
+                    </svg>
+                  </span>
+                )}
+                {config.speakingTime < 65 ? " s" : ""}
               </label>
               <input
                 type="range"
                 min="10"
-                max="60"
+                max="65"
                 step="5"
                 value={config.speakingTime}
                 onChange={(e) =>
@@ -128,13 +148,30 @@ export default function Creer() {
             {/* Temps de débat */}
             <div className="space-y-2">
               <label className="block text-sm">
-                Temps de débat: {config.debateTime}s
+                Temps de débat:{" "}
+                {config.debateTime < 185 ? (
+                  config.debateTime
+                ) : (
+                  <span className="relative inline-flex items-center h-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 -6 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.74-8z" />
+                    </svg>
+                  </span>
+                )}
+                {config.debateTime < 185 ? " s" : ""}
               </label>
               <input
                 type="range"
                 min="30"
-                max="180"
-                step="15"
+                max="185" // Augmenter le max pour permettre une valeur "infini"
+                step="5"
                 value={config.debateTime}
                 onChange={(e) =>
                   setConfig((prev) => ({
